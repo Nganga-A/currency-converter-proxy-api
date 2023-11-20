@@ -22,6 +22,29 @@ app.add_middleware(
     allow_headers=["*"], #Allow all HTTP request headers
 )
 
+@app.get('/')
+async def index():
+    if not APP_API_KEY:
+        # Raise HTTPException with a 500 status code and a detailed error message
+        raise HTTPException(
+            status_code=500,
+            detail='Server encountered an error. Please ensure that CONVERTER_API_KEY is set.'
+        )
+    else:
+        # Make a request to the exchange rate API using the API key
+        r = requests.get(f'https://v6.exchangerate-api.com/v6/{APP_API_KEY}/latest/USD')
+        if r.status_code == 200:
+            # Return the API response as JSON with a 200 status code
+            return Response(r.content, status_code=200, media_type='application/json')
+        else:
+            # Raise HTTPException with a 502 status code and a detailed error message
+            raise HTTPException(
+                status_code=502,
+                detail='Server is unable to complete the request at the moment. Please try again later.'
+            )
+
+
+
 
 # Define a route for the convert endpoint
 @app.get('/convert/{base_currency}/{target_currency}/{amount}')
