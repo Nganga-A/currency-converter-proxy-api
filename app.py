@@ -47,6 +47,7 @@ async def index():
             # Cache newly received rates
             redis_connection.set('USD', r.content)
             redis_connection.expire('USD', 43200)
+            log_api_call()
             return Response(r.content, status_code=200, media_type='application/json')
         else:
             raise HTTPException(
@@ -73,6 +74,7 @@ async def get_rates(base_currency):
             # Cache newly received rates
             redis_connection.set(base_currency, r.content)
             redis_connection.expire(base_currency, 43200)
+            log_api_call()
             return Response(r.content, status_code=200, media_type='application/json')
         else:
             raise HTTPException(
@@ -102,6 +104,18 @@ async def convert(base_currency: str, target_currency: str, amount: float):
             status_code=502,
             detail='Server is unable to complete the request at the moment. Please try again later.'
         )
+
+
+def log_api_call():
+    count = redis_connection.get('count')
+    if not count:
+        redis_connection.set('count', 1)
+    else:
+        count = int(count) + 1
+        redis_connection.set('count', count)
+        print(f'Latest count is {count}')
+
+
 
 if __name__ == '__main__':
     # Retrieve the port from the environment variable 'PORT', defaulting to 10,000 if not set
