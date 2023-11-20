@@ -3,12 +3,17 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import requests
 import os
+import redis
 
 # FastAPI app instance
 app = FastAPI()
 
 # Retrieve the API key from environment variables
 APP_API_KEY = os.getenv('CONVERTER_API_KEY', None)
+
+
+REDIS_URL = os.getenv('REDIS_URL')
+redis_connection = redis.from_url(REDIS_URL)
 
 """
 Allow CORS for API requests
