@@ -85,6 +85,10 @@ async def convert(base_currency: str, target_currency: str, amount: float):
             detail='Server is unable to complete the request at the moment. Please try again later.'
         )
 
-# Run the FastAPI app using Uvicorn if the script is executed directly
 if __name__ == '__main__':
-    uvicorn.run('app:app', host='127.0.0.1', port=5555, log_level='info', reload=True)
+    # Retrieve the port from the environment variable 'PORT', defaulting to 10,000 if not set
+    port = int(os.getenv('PORT', 10000))
+
+    # Run the FastAPI app using Uvicorn
+    uvicorn.run('app:app', host='0.0.0.0', port=port, log_level='info', reload=True)
+
