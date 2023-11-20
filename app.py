@@ -22,6 +22,7 @@ app.add_middleware(
     allow_headers=["*"], #Allow all HTTP request headers
 )
 
+# Define a route for the root endpoint
 @app.get('/')
 async def index():
     if not APP_API_KEY:
@@ -43,8 +44,23 @@ async def index():
                 detail='Server is unable to complete the request at the moment. Please try again later.'
             )
 
-
-
+#Define a route for the latest rates for the specified currency
+@app.get('/rates/{base_currency}')
+async def get_rates(base_currency):
+    if not APP_API_KEY:
+        raise HTTPException(
+            status_code=500,
+            detail='Server encountered an error and could unfortunately not complete the request'
+        )
+    else:
+        r = requests.get(f'https://v6.exchangerate-api.com/v6/{APP_API_KEY}/latest/{base_currency}')
+        if r.status_code == 200:
+            return Response(r.content, status_code=200, media_type='application/json')
+        else:
+            raise HTTPException(
+                status_code=502,
+                detail='Server is unable to complete the request at the moment'
+            )
 
 # Define a route for the convert endpoint
 @app.get('/convert/{base_currency}/{target_currency}/{amount}')
