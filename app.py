@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Response, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import requests
 import os
@@ -8,6 +9,19 @@ app = FastAPI()
 
 # Retrieve the API key from environment variables
 APP_API_KEY = os.getenv('CONVERTER_API_KEY', None)
+
+"""
+Allow CORS for API requests
+Read more here: https://fastapi.tiangolo.com/tutorial/cors/
+"""
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], #Allow any origin to make cross-origin requests
+    allow_credentials=True, #Allow credentials
+    allow_methods=["*"], #Allow all HTTP methods
+    allow_headers=["*"], #Allow all HTTP request headers
+)
+
 
 # Define a route for the convert endpoint
 @app.get('/convert/{base_currency}/{target_currency}/{amount}')
