@@ -12,6 +12,7 @@ fastapi = {extras = ["all"], version = "*"}
 email-validator = "*"
 httptools = "*"
 orjson = "*"
+pydantic-settings = "*"
 
 [dev-packages]
 
