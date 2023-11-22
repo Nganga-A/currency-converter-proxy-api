@@ -15,6 +15,7 @@ orjson = "*"
 pydantic-settings = "*"
 ujson = "*"
 uvloop = "*"
+watchfiles = "*"
 
 [dev-packages]
 
