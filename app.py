@@ -117,9 +117,9 @@ def log_api_call():
 
 
 
-# if __name__ == '__main__':
-#     # Retrieve the port from the environment variable 'PORT', defaulting to 10,000 if not set
-#     port = int(os.getenv('PORT', 10000))
+if __name__ == '__main__':
+    # Retrieve the port from the environment variable 'PORT', defaulting to 10,000 if not set
+    port = int(os.getenv('PORT', 10000))
 
-#     # Run the FastAPI app using Uvicorn
-#     uvicorn.run('app:app', host='0.0.0.0', port=port, log_level='info', reload=True)
+    # Run the FastAPI app using Uvicorn
+    uvicorn.run('app:app', host='0.0.0.0', port=port, log_level='info', reload=True)
