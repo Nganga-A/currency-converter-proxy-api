@@ -11,6 +11,7 @@ httpx = "*"
 fastapi = {extras = ["all"], version = "*"}
 email-validator = "*"
 httptools = "*"
+orjson = "*"
 
 [dev-packages]
 
