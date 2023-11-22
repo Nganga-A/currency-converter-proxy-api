@@ -9,6 +9,7 @@ requests = "*"
 redis = "*"
 httpx = "*"
 fastapi = {extras = ["all"], version = "*"}
+email-validator = "*"
 
 [dev-packages]
 
