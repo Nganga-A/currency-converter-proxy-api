@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = "*"
 uvicorn = "*"
 requests = "*"
 redis = "*"
 httpx = "*"
+fastapi = {extras = ["all"], version = "*"}
 
 [dev-packages]
 
