@@ -16,6 +16,7 @@ pydantic-settings = "*"
 ujson = "*"
 uvloop = "*"
 watchfiles = "*"
+websockets = "*"
 
 [dev-packages]
 
