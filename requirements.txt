@@ -17,6 +17,7 @@ MarkupSafe
 orjson
 pydantic
 pydantic-extra-types
+python-dotenv
 pydantic-settings
 pydantic_core
 python-multipart

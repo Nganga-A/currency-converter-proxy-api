@@ -4,6 +4,10 @@ import uvicorn
 import requests
 import os
 import redis
+from dotenv import load_dotenv
+
+if os.path.exists('.env'):
+    load_dotenv()
 
 # FastAPI app instance
 app = FastAPI()

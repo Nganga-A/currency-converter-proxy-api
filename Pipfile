@@ -17,6 +17,7 @@ ujson = "*"
 uvloop = "*"
 watchfiles = "*"
 websockets = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
