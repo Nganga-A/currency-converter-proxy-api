@@ -19,7 +19,6 @@ pydantic
 pydantic-extra-types
 pydantic-settings
 pydantic_core
-python-doten
 python-multipart
 PyYAML
 redis
