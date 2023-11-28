@@ -31,6 +31,17 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all HTTP request headers
 )
 
+try:
+    # Attempt to connect to Redis
+    redis_connection = redis.from_url(REDIS_URL)
+    print(redis_connection)
+except redis.exceptions.ConnectionError as e:
+    # Log the error or handle it as needed
+    print(f"Error connecting to Redis: {e}")
+    # Raise an HTTPException or return a default response
+    raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
 # Define a route for the root endpoint
 @app.get('/')
 async def index():
